@@ -5,11 +5,14 @@ const generateButton = document.getElementById('generateButton');
 const ctx = canvas.getContext('2d');
 
 // Set your desired canvas dimensions
-const width = 200;
-const height = 100;
+const width = 53;
+const height = 7;
 
 canvas.width = width;
 canvas.height = height;
+
+// default text
+document.getElementById('textInput').value = 'Hello world!';
 
 // Event listener for the button
 generateButton.addEventListener('click', function() {
@@ -24,7 +27,7 @@ function generateGreyscaleImage(text) {
     ctx.clearRect(0, 0, width, height);
 
     // Set text properties
-    ctx.font = '20px Arial';
+    ctx.font = '8px Arial';
     ctx.fillStyle = 'black';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
