@@ -1,5 +1,8 @@
 type CharacterArray = number[][];
 
+export const charHeight = 7;
+export const charWidth = 6;
+
 export const alphabet: { [key: string]: CharacterArray } = {
     'A': [
         [0, 1, 1, 1, 1, 0],

@@ -1,8 +1,7 @@
-// import letters_part1.ts into this file scope
-import { alphabet } from "./letters.ts";
+import { alphabet, charHeight, charWidth } from "./letters.ts";
 
 function renderStringHorizontally(input: string): void {
-    const rows: string[] = Array(7).fill(""); // Assuming each character array has 7 rows
+    const rows: string[] = Array(charHeight).fill("");
 
     for (const char of input) {
         const charArray = alphabet[char];
@@ -13,7 +12,7 @@ function renderStringHorizontally(input: string): void {
         } else {
             // Handle undefined characters (e.g., space) with empty spaces
             for (let i = 0; i < rows.length; i++) {
-                rows[i] += "      "; // Adding an empty 6-column space for undefined characters
+                rows[i] += " ".repeat(charWidth); // Add empty space for undefined characters
             }
         }
     }
