@@ -8,7 +8,7 @@ function preRender(input: string): string[] {
     if (charArray) {
       for (let i = 0; i < charArray.length; i++) {
         rows[i] +=
-          charArray[i].map((pixel) => (pixel === 1 ? "█" : " ")).join("") + " ";
+          charArray[i].map((pixel) => renderPixel(pixel)).join("") + " ";
       }
     } else {
       for (let i = 0; i < rows.length; i++) {
@@ -18,6 +18,10 @@ function preRender(input: string): string[] {
   }
 
   return rows;
+}
+
+function renderPixel(pixel: number): string {
+  return pixel === 1 ? "█" : " ";
 }
 
 function renderArrayToConsole(rows: string[]): void {
