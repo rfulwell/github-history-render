@@ -1,18 +1,17 @@
 import { alphabet, charHeight, charWidth } from "./letters.ts";
 
-function preRender(input: string): string[] {
-  const rows: string[] = Array(charHeight).fill("");
+function preRender(input: string): number[][][] {
+  const rows: number[][][] = Array(charHeight).fill([]).map(() => []);
 
   for (const char of input) {
     const charArray = alphabet[char];
     if (charArray) {
       for (let i = 0; i < charArray.length; i++) {
-        rows[i] +=
-          charArray[i].map((pixel) => renderPixel(pixel)).join("") + " ";
+        rows[i].push(charArray[i]);
       }
     } else {
       for (let i = 0; i < rows.length; i++) {
-        rows[i] += " ".repeat(charWidth);
+        rows[i].push(Array(charWidth).fill(0));
       }
     }
   }
@@ -24,15 +23,19 @@ function renderPixel(pixel: number): string {
   return pixel === 1 ? "█" : " ";
 }
 
-function renderArrayToConsole(rows: string[]): void {
+function renderArrayToConsole(rows: number[][][]): void {
   for (const row of rows) {
-    console.log(row);
+    let renderedRow = "";
+    for (const charPixels of row) {
+      renderedRow += charPixels.map(renderPixel).join("") + " ";
+    }
+    console.log(renderedRow);
   }
 }
 
 function renderStringHorizontally(input: string): void {
-  const stringArray = preRender(input);
-  renderArrayToConsole(stringArray);
+  const pixelArray = preRender(input);
+  renderArrayToConsole(pixelArray);
 }
 
 // Example usage:
