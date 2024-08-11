@@ -1,20 +1,6 @@
 // import letters_part1.ts into this file scope
 import { alphabet } from "./letters.ts";
 
-type CharacterArray = number[][];
-
-// Function to render a character
-function renderCharacter(char: string) {
-    const charArray = alphabet[char];
-    if (!charArray) {
-        console.log(`Character ${char} not found in the alphabet array.`);
-        return;
-    }
-
-    charArray.forEach(row => {
-        console.log(row.map(pixel => (pixel === 1 ? '█' : ' ')).join(''));
-    });
-}
 function renderStringHorizontally(input: string): void {
     const rows: string[] = Array(7).fill(""); // Assuming each character array has 7 rows
 
