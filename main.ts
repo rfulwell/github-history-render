@@ -3,6 +3,12 @@ import { alphabet, charHeight, charWidth } from "./letters.ts";
 // TODO: write automated tests to ensure character data works with
 // expectations elsewhere in the code e.g. in the preRender function
 
+function renderStringHorizontally(input: string): void {
+  const rows = initializeRows();
+  const pixelArray = preRender(input, rows);
+  renderArrayToConsole(pixelArray);
+}
+
 function initializeRows(): number[][][] {
   return Array(charHeight).fill([]).map(() => []);
 }
@@ -11,7 +17,6 @@ function preRender(input: string, rows: number[][][]): number[][][] {
   for (const char of input) {
     processChar(char, rows);
   }
-
   return rows;
 }
 
@@ -24,12 +29,6 @@ function processChar(char: string, rows: number[][][]): void {
   }
 }
 
-function appendToRows(rows: number[][][], rowData: number[][]) {
-  for (let i = 0; i < rows.length; i++) {
-    rows[i].push(rowData[i]);
-  }
-}
-
 function appendCharToRows(charArray: number[][], rows: number[][][]) {
   appendToRows(rows, charArray);
 }
@@ -38,8 +37,10 @@ function appendEmptyCharToRows(rows: number[][][]) {
   appendToRows(rows, Array(rows.length).fill(Array(charWidth).fill(0)));
 }
 
-function renderPixel(pixel: number): string {
-  return pixel === 1 ? "█" : " ";
+function appendToRows(rows: number[][][], rowData: number[][]) {
+  for (let i = 0; i < rows.length; i++) {
+    rows[i].push(rowData[i]);
+  }
 }
 
 function renderArrayToConsole(rows: number[][][]): void {
@@ -56,10 +57,8 @@ function renderRow(row: number[][]): void {
   console.log(renderedRow);
 }
 
-function renderStringHorizontally(input: string): void {
-  const rows = initializeRows();
-  const pixelArray = preRender(input, rows);
-  renderArrayToConsole(pixelArray);
+function renderPixel(pixel: number): string {
+  return pixel === 1 ? "█" : " ";
 }
 
 // Example usage:
