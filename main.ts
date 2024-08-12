@@ -39,4 +39,4 @@ function renderStringHorizontally(input: string): void {
 }
 
 // Example usage:
-renderStringHorizontally("Hello world");
+renderStringHorizontally("Hello world!");
