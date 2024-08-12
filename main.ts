@@ -9,17 +9,25 @@ function preRender(input: string): number[][][] {
   for (const char of input) {
     const charArray = alphabet[char];
     if (charArray) {
-      for (let i = 0; i < charArray.length; i++) {
-        rows[i].push(charArray[i]);
-      }
+      appendCharToRows(charArray, rows);
     } else {
-      for (let i = 0; i < rows.length; i++) {
-        rows[i].push(Array(charWidth).fill(0));
-      }
+      appendEmptyCharToRows(rows);
     }
   }
 
   return rows;
+}
+
+function appendCharToRows(charArray: number[][], rows: number[][][]) {
+  for (let i = 0; i < charArray.length; i++) {
+    rows[i].push(charArray[i]);
+  }
+}
+
+function appendEmptyCharToRows(rows: number[][][]) {
+  for (let i = 0; i < rows.length; i++) {
+    rows[i].push(Array(charWidth).fill(0));
+  }
 }
 
 function renderPixel(pixel: number): string {
