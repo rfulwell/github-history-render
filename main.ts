@@ -7,15 +7,19 @@ function preRender(input: string): number[][][] {
   const rows: number[][][] = Array(charHeight).fill([]).map(() => []);
 
   for (const char of input) {
-    const charArray = alphabet[char];
-    if (charArray) {
-      appendCharToRows(charArray, rows);
-    } else {
-      appendEmptyCharToRows(rows);
-    }
+    processChar(char, rows);
   }
 
   return rows;
+}
+
+function processChar(char: string, rows: number[][][]): void {
+  const charArray = alphabet[char];
+  if (charArray) {
+    appendCharToRows(charArray, rows);
+  } else {
+    appendEmptyCharToRows(rows);
+  }
 }
 function appendToRows(rows: number[][][], rowData: number[][]) {
   for (let i = 0; i < rows.length; i++) {
