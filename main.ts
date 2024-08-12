@@ -21,6 +21,7 @@ function processChar(char: string, rows: number[][][]): void {
     appendEmptyCharToRows(rows);
   }
 }
+
 function appendToRows(rows: number[][][], rowData: number[][]) {
   for (let i = 0; i < rows.length; i++) {
     rows[i].push(rowData[i]);
@@ -41,12 +42,16 @@ function renderPixel(pixel: number): string {
 
 function renderArrayToConsole(rows: number[][][]): void {
   for (const row of rows) {
-    let renderedRow = "";
-    for (const charPixels of row) {
-      renderedRow += charPixels.map(renderPixel).join("") + " ";
-    }
-    console.log(renderedRow);
+    renderRow(row);
   }
+}
+
+function renderRow(row: number[][]): void {
+  let renderedRow = "";
+  for (const charPixels of row) {
+    renderedRow += charPixels.map(renderPixel).join("") + " ";
+  }
+  console.log(renderedRow);
 }
 
 function renderStringHorizontally(input: string): void {
