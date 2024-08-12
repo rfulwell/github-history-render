@@ -20,7 +20,7 @@ export function preRender(input: string, rows: number[][][]): number[][][] {
   return rows;
 }
 
-export function processChar(char: string, rows: number[][][]): void {
+function processChar(char: string, rows: number[][][]): void {
   const charArray = alphabet[char];
   if (charArray) {
     appendCharToRows(charArray, rows);
@@ -29,11 +29,11 @@ export function processChar(char: string, rows: number[][][]): void {
   }
 }
 
-export function appendCharToRows(charArray: number[][], rows: number[][][]) {
+function appendCharToRows(charArray: number[][], rows: number[][][]) {
   appendToRows(rows, charArray);
 }
 
-export function appendEmptyCharToRows(rows: number[][][]) {
+function appendEmptyCharToRows(rows: number[][][]) {
   appendToRows(rows, Array(rows.length).fill(Array(charWidth).fill(0)));
 }
 
@@ -49,7 +49,7 @@ export function renderArrayToConsole(rows: number[][][]): void {
   }
 }
 
-export function renderRow(row: number[][]): void {
+function renderRow(row: number[][]): void {
   let renderedRow = "";
   for (const charPixels of row) {
     renderedRow += charPixels.map(renderPixel).join("") + " ";
@@ -57,7 +57,7 @@ export function renderRow(row: number[][]): void {
   console.log(renderedRow);
 }
 
-export function renderPixel(pixel: number): string {
+function renderPixel(pixel: number): string {
   return pixel === 1 ? "█" : " ";
 }
 
