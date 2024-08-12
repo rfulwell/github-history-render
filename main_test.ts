@@ -38,7 +38,7 @@ Deno.test("renderString test", () => {
   for (let i = 0; i < charHeight; i++) {
     const expectedH = alphabet["H"][i].map(pixel => pixel === 1 ? "█" : " ").join("");
     const expectedI = alphabet["I"][i].map(pixel => pixel === 1 ? "█" : " ").join("");
-    assertEquals(logs[i], expectedH + " " + expectedI);
+    assertEquals(logs[i], expectedH + " " + expectedI + " ");
   }
 
   console.log = mockConsoleLog;
