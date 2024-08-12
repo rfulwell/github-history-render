@@ -37,8 +37,12 @@ function appendEmptyChar(rows: number[][]) {
   return appendToCols(rows, Array(rows.length).fill(Array(charWidth).fill(0)));
 }
 
-export function appendToCols(_rows: number[][], dataToAppend: number[][]): number[][] {
-  return _rows.map((row, index) => [...row, ...dataToAppend[index], 0])
+export function appendToCols(
+  rows: number[][],
+  dataToAppend: number[][],
+): number[][] {
+  // this includes a blank vertical column to separate the characters
+  return rows.map((row, index) => [...row, ...dataToAppend[index], 0]);
 }
 
 export function renderArrayToConsole(rows: number[][]): void {
