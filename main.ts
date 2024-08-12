@@ -9,50 +9,48 @@ export function renderString(input: string): void {
   renderArrayToConsole(pixelArray);
 }
 
-export function initializeRows(): number[][][] {
-  return Array(charHeight).fill([]).map(() => []);
+export function initializeRows(): number[][] {
+  return Array(charHeight).fill([]);
 }
 
-export function preRender(input: string, rows: number[][][]): number[][][] {
+export function preRender(input: string, rows: number[][]): number[][] {
   for (const char of input) {
-    processChar(char, rows);
+    rows = processChar(char, rows);
   }
   return rows;
 }
 
-function processChar(char: string, rows: number[][][]): void {
+function processChar(char: string, rows: number[][]) {
   const charArray = alphabet[char];
   if (charArray) {
-    appendCharToRows(charArray, rows);
+    return appendChar(charArray, rows);
   } else {
-    appendEmptyCharToRows(rows);
+    return appendEmptyChar(rows);
   }
 }
 
-function appendCharToRows(charArray: number[][], rows: number[][][]) {
-  appendToRows(rows, charArray);
+function appendChar(charArray: number[][], rows: number[][]) {
+  return appendToCols(rows, charArray);
 }
 
-function appendEmptyCharToRows(rows: number[][][]) {
-  appendToRows(rows, Array(rows.length).fill(Array(charWidth).fill(0)));
+function appendEmptyChar(rows: number[][]) {
+  return appendToCols(rows, Array(rows.length).fill(Array(charWidth).fill(0)));
 }
 
-export function appendToRows(rows: number[][][], rowData: number[][]) {
-  for (let i = 0; i < rows.length; i++) {
-    rows[i].push(rowData[i]);
-  }
+export function appendToCols(_rows: number[][], dataToAppend: number[][]): number[][] {
+  return _rows.map((row, index) => [...row, ...dataToAppend[index], 0])
 }
 
-export function renderArrayToConsole(rows: number[][][]): void {
+export function renderArrayToConsole(rows: number[][]): void {
   for (const row of rows) {
     renderRow(row);
   }
 }
 
-function renderRow(row: number[][]): void {
+function renderRow(row: number[]): void {
   let renderedRow = "";
-  for (const charPixels of row) {
-    renderedRow += charPixels.map(renderPixel).join("") + " ";
+  for (const charPixel of row) {
+    renderedRow += renderPixel(charPixel);
   }
   console.log(renderedRow);
 }
