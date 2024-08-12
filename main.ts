@@ -17,17 +17,18 @@ function preRender(input: string): number[][][] {
 
   return rows;
 }
-
-function appendCharToRows(charArray: number[][], rows: number[][][]) {
-  for (let i = 0; i < charArray.length; i++) {
-    rows[i].push(charArray[i]);
+function appendToRows(rows: number[][][], rowData: number[][]) {
+  for (let i = 0; i < rows.length; i++) {
+    rows[i].push(rowData[i]);
   }
 }
 
+function appendCharToRows(charArray: number[][], rows: number[][][]) {
+  appendToRows(rows, charArray);
+}
+
 function appendEmptyCharToRows(rows: number[][][]) {
-  for (let i = 0; i < rows.length; i++) {
-    rows[i].push(Array(charWidth).fill(0));
-  }
+  appendToRows(rows, Array(rows.length).fill(Array(charWidth).fill(0)));
 }
 
 function renderPixel(pixel: number): string {
