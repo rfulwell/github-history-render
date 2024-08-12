@@ -3,9 +3,11 @@ import { alphabet, charHeight, charWidth } from "./letters.ts";
 // TODO: write automated tests to ensure character data works with
 // expectations elsewhere in the code e.g. in the preRender function
 
-function preRender(input: string): number[][][] {
-  const rows: number[][][] = Array(charHeight).fill([]).map(() => []);
+function initializeRows(): number[][][] {
+  return Array(charHeight).fill([]).map(() => []);
+}
 
+function preRender(input: string, rows: number[][][]): number[][][] {
   for (const char of input) {
     processChar(char, rows);
   }
@@ -55,7 +57,8 @@ function renderRow(row: number[][]): void {
 }
 
 function renderStringHorizontally(input: string): void {
-  const pixelArray = preRender(input);
+  const rows = initializeRows();
+  const pixelArray = preRender(input, rows);
   renderArrayToConsole(pixelArray);
 }
 
