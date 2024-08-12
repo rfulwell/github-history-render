@@ -18,6 +18,18 @@
         "--allow-all"
       ],
       "attachSimplePort": 9229
+    },
+    {
+      "request": "launch",
+      "name": "Debug tests",
+      "type": "node",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "deno",
+      "runtimeArgs": [
+        "test",
+        "--inspect-brk"
+      ],
+      "attachSimplePort": 9229
     }
   ]
 }
