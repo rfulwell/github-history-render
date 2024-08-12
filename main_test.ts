@@ -15,7 +15,7 @@ Deno.test("preRender test with single character", () => {
   const result = preRender("A", rows);
   assertEquals(result.length, charHeight);
   for (let i = 0; i < charHeight; i++) {
-    assertEquals(result[i], alphabet["A"][i]);
+    assertEquals(result[i], [alphabet["A"][i]]);
   }
 });
 
@@ -24,7 +24,7 @@ Deno.test("preRender test with multiple characters", () => {
   const result = preRender("AB", rows);
   assertEquals(result.length, charHeight);
   for (let i = 0; i < charHeight; i++) {
-    assertEquals(result[i], [...alphabet["A"][i], ...alphabet["B"][i]]);
+    assertEquals(result[i], [...alphabet["A"][i], ...alphabet["B"][i]].map(num => [num]));
   }
 });
 
