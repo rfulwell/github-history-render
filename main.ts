@@ -1,4 +1,4 @@
-import { alphabet, charHeight, charWidth } from "./letters.ts";
+import { alphabet, charHeight } from "./letters.ts";
 
 // TODO: write automated tests to ensure character data works with
 // expectations elsewhere in the code e.g. in the preRender function
@@ -6,6 +6,7 @@ import { alphabet, charHeight, charWidth } from "./letters.ts";
 export function renderString(input: string): void {
   const rows = initializeRows();
   const pixelArray = preRender(input, rows);
+  console.log('column count: ', pixelArray[0].length);
   renderArrayToConsole(pixelArray);
 }
 
@@ -34,7 +35,7 @@ function appendChar(charArray: number[][], rows: number[][]) {
 }
 
 function appendEmptyChar(rows: number[][]) {
-  return appendToCols(rows, Array(rows.length).fill(Array(charWidth).fill(0)));
+  return appendToCols(rows, Array(rows.length).fill(Array(1).fill(0)));
 }
 
 export function appendToCols(

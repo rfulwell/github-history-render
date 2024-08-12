@@ -1,6 +1,6 @@
 import { assertEquals } from "@std/assert";
 import { renderString, initializeRows, preRender } from "./main.ts";
-import { alphabet, charHeight, charWidth } from "./letters.ts";
+import { alphabet, charHeight } from "./letters.ts";
 
 Deno.test("initializeRows test", () => {
   const result = initializeRows();
