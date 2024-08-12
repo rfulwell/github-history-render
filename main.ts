@@ -1,5 +1,8 @@
 import { alphabet, charHeight, charWidth } from "./letters.ts";
 
+// TODO: write automated tests to ensure character data works with
+// expectations elsewhere in the code e.g. in the preRender function
+
 function preRender(input: string): number[][][] {
   const rows: number[][][] = Array(charHeight).fill([]).map(() => []);
 
