@@ -3,7 +3,7 @@ import { alphabet, charHeight } from "./letters.ts";
 export function renderString(input: string): void {
   const rows = initializeRows();
   const pixelArray = preRender(input, rows);
-  console.log("column count: ", pixelArray[0].length);
+  console.info("column count: ", pixelArray[0].length);
   renderArrayToConsole(pixelArray);
   renderArrayToGitHistory(pixelArray);
 }
