@@ -27,7 +27,8 @@
       "runtimeExecutable": "deno",
       "runtimeArgs": [
         "test",
-        "--inspect-brk"
+        "--inspect-brk",
+        "--allow-all"
       ],
       "attachSimplePort": 9229
     }
