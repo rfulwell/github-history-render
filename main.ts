@@ -93,10 +93,11 @@ function writeCommitsForDay(outputFilename: string, date: Date) {
   const formattedDate = date.toISOString().split("T")[0];
   // write four commits each day for maximum brightness
   // this is based on GitHub's parsing of the commit context which does
-  // not feature more than four commits in a given day
+  // not feature more than four commits for me in a given day
   // this can be scaled up as needed when I have more public commit history
-  for (let i = 0; i < 4; i++) {
-    const commitMessage = `commit for ${formattedDate} (${i + 1} of 4)`;
+  const commitTotal = 4;
+  for (let i = 0; i < commitTotal; i++) {
+    const commitMessage = `commit for ${formattedDate} (${i + 1} of ${commitTotal})`;
     const gitCommand =
       `git commit --allow-empty -m "${commitMessage}" --date="${formattedDate}"`;
     Deno.writeTextFileSync(outputFilename, gitCommand + "\n", {
