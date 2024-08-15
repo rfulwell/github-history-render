@@ -1,5 +1,5 @@
 import { assertEquals } from "@std/assert";
-import { renderString, initializeRows, preRender } from "./main.ts";
+import { initializeRows, preRender, renderString } from "./main.ts";
 import { alphabet, charHeight } from "./letters.ts";
 
 Deno.test("initializeRows test", () => {
@@ -36,8 +36,10 @@ Deno.test("renderString test", () => {
   renderString("HI");
   assertEquals(logs.length, charHeight);
   for (let i = 0; i < charHeight; i++) {
-    const expectedH = alphabet["H"][i].map(pixel => pixel === 1 ? "█" : " ").join("");
-    const expectedI = alphabet["I"][i].map(pixel => pixel === 1 ? "█" : " ").join("");
+    const expectedH = alphabet["H"][i].map((pixel) => pixel === 1 ? "█" : " ")
+      .join("");
+    const expectedI = alphabet["I"][i].map((pixel) => pixel === 1 ? "█" : " ")
+      .join("");
     assertEquals(logs[i], expectedH + " " + expectedI + " ");
   }
 
