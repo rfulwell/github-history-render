@@ -8,6 +8,7 @@ export function renderString(input: string): void {
   const pixelArray = preRender(input, rows);
   console.log('column count: ', pixelArray[0].length);
   renderArrayToConsole(pixelArray);
+  renderArrayToGitHistory(pixelArray);
 }
 
 export function initializeRows(): number[][] {
@@ -62,6 +63,37 @@ function renderRow(row: number[]): void {
 
 function renderPixel(pixel: number): string {
   return pixel === 1 ? "█" : " ";
+}
+
+export function renderArrayToGitHistory(rows: number[][]): void {
+  // for now, hardcode a suitable start date that is mostly clear in my existing history
+  const date = new Date("2023-09-03");
+  const outputFilename = `git-history-write.sh`
+  Deno.writeTextFileSync(outputFilename, `#!/bin/bash\n`);
+  // column-first loop through the pre-rendered array - this models the order 
+  // the days are rendered in the git history chart on the user profile page
+  for (let col = 0; col < rows[0].length; col++) {
+    for (let row = 0; row < rows.length; row++) {
+      const pixel = rows[row][col];
+      console.debug(`found a pixel value of ${pixel} at row ${row} and column ${col}`);
+
+      if (pixel === 1) {
+        // write commit data on days where there is a pixel present
+        const formattedDate = date.toISOString().split("T")[0];
+        // write four commits each day for maximum brightness
+        for (let i = 0; i < 4; i++) {
+          const commitMessage = `commit for ${formattedDate} (${i + 1} of 4)`;
+          const gitCommand = `git commit --allow-empty -m "${commitMessage}" --date="${formattedDate}"`;
+          Deno.writeTextFileSync(outputFilename, gitCommand + "\n", { append: true });
+          }
+      }
+      else {
+        // skip writing commits on days where there is no pixel present
+      }
+
+      date.setDate(date.getDate() + 1);
+    }
+  }
 }
 
 // Example usage:
